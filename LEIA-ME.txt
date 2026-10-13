@@ -1,0 +1,56 @@
+INTERNET – BTP: atalho experimental para navegador do Meta Quest 3S
+=====================================================================
+Objetivo
+--------
+Gerar um APK próprio com ícone INTERNET - BTP. Quando o aluno tocar no ícone,
+o app solicita ao Horizon OS que abra o navegador nativo em https://www.google.com/.
+É um atalho, não um navegador alternativo, e não coleta dados.
+
+IMPORTANTE: O recurso systemux://browser é DOCUMENTADO oficialmente pela Meta,
+mas a instalação e execução desse APK no MODO PARTILHADO (HMS) AINDA NÃO FORAM
+TESTADAS EM UM QUEST. Não implemente nos 30 antes de validar em um dispositivo.
+
+Documentação Meta:
+https://developers.meta.com/vr/documentation/android-apps/ps-system-deep-linking/
+https://developers.meta.com/vr/resources/qfb-private-apps-dist/
+
+Como gerar o APK gratuitamente (opção Android Studio)
+-------------------------------------------------------
+1. Instale o Android Studio para Windows: https://developer.android.com/studio
+2. Abra a pasta Internet_BTP_Quest3S como projeto Android.
+3. Configure o Android SDK 35, JDK 17 e Gradle 8.9 conforme solicitado.
+   Observação: o projeto usa arquivos Gradle, mas não inclui o binário do Gradle Wrapper.
+   Em Android Studio, selecione Gradle local 8.9 ou gere o Gradle Wrapper.
+4. Compile pelo menu Build > Build APK(s).
+5. O APK de TESTE estará em app/build/outputs/apk/debug/app-debug.apk.
+
+Alternativa sem Android Studio: GitHub Actions
+---------------------------------------------
+O diretório .github/workflows possui um processo de compilação automática.
+Ao colocar estes arquivos na raiz de um repositório GitHub, vá até
+Actions > Build test APK > Run workflow e baixe o artefato compilado.
+Não use sites desconhecidos para gerar APKs.
+
+Distribuição pelo HMS
+--------------------
+1. Para o APK ser instalado pelo HMS no modo 'Alojada externamente', hospede o
+   arquivo em URL pública HTTPS de download DIRETO (por exemplo, GitHub Releases).
+   Um link comum de compartilhamento do Google Drive pode não funcionar como URL direta.
+2. No HMS: Apps e conteúdos > Gerir apps > Adicionar app > Alojada externamente.
+3. Nome: INTERNET - BTP. Cole a URL do APK. Não precisa de arquivo OBB.
+4. Se o cadastro for aceito, atribua à predefinição BELMIRO VR - ALUNOS.
+5. Teste no primeiro Quest 3S. Toque no ícone e confira se abre Quest Browser.
+6. Se houver falha 'incompatível com modo partilhado' ou o ícone não abrir o
+   navegador, PARE. A instalação do APK não implica que a Meta permitiu abrir o
+   Browser; mantenha a solução por imagem que já funciona.
+7. Para produção, assine uma versão RELEASE com uma chave persistente, guardada
+   em segurança, para permitir atualizações dos 30 dispositivos.
+
+Limitações
+----------
+- Este arquivo é um PROJETO FONTE, não um APK já compilado ou testado.
+- A URL de download não é fornecida; depende da compilação e hospedagem.
+- O app não concede acesso a sites bloqueados pela rede escolar e não fornece
+  filtragem web. Regras de privacidade e segurança continuam válidas.
+- Não alterar pacotes/aplicativos da Meta nem desativar proteções do HMS.
+- Não apagar a imagem de acesso ao Browser até validar este atalho.
